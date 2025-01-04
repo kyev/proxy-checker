@@ -1,69 +1,87 @@
-🚀 Proxy Checker - Verificador de Proxies Ativos
-Este script Python é projetado para verificar a disponibilidade de proxies listados em um arquivo de texto. Ele verifica proxies de diferentes tipos, como SOCKS4, SOCKS5, HTTP e HTTPS, e retorna se estão ativas ou não. As proxies ativas são salvas em um arquivo para referência futura. ✅🌐
+🚀 Proxy Checker - Verificador de Proxies 💻🌐
+Este script em Python permite verificar se suas proxies HTTP, HTTPS, SOCKS4 ou SOCKS5 estão ativas ou inativas. Você pode carregar um arquivo de proxies e o script vai testar a conectividade com um site de teste, como o Google. As proxies ativas serão salvas em um arquivo de saída para uso futuro.
 
-🛠️ Funcionalidades
-Verificação em múltiplos tipos de proxies: O script tenta identificar proxies SOCKS5, SOCKS4, HTTP e HTTPS. 🔍
-Verificação rápida: Utiliza a biblioteca ThreadPoolExecutor para verificar proxies em paralelo, aumentando a performance. ⚡
-Suporte a SOCKS5 e SOCKS4: Usa a biblioteca requests com suporte para proxies SOCKS, além de HTTP/HTTPS. 🌐
-Feedback visual colorido: Utiliza cores com colorama para destacar proxies ativas (verde) e inativas (vermelho). 🎨
-Salvamento de proxies ativas: Armazena as proxies válidas em um arquivo de saída, removendo duplicatas. 📂
 📦 Requisitos
-Certifique-se de ter as bibliotecas necessárias instaladas antes de rodar o script:
+Python 3.x
+Bibliotecas:
+requests
+colorama
+concurrent.futures
+Você pode instalar as dependências executando:
 
 bash
 Copiar código
-pip install requests colorama pysocks
-📝 Como Usar
-Prepare seu arquivo de proxies: Crie um arquivo de texto (proxies.txt) com uma lista de proxies no formato IP:PORTA. Coloque o arquivo na mesma pasta do script.
-Execute o script: Rode o script Python para verificar as proxies. 👨‍💻
-Exemplo de proxies.txt:
-txt
+pip install requests colorama
+🔧 Funcionalidade
+Verifica Proxies: O script testa proxies HTTP, HTTPS, SOCKS4 ou SOCKS5.
+Exibe Status: Exibe proxies ativas (verdes) e mortas (vermelhas) no terminal.
+Arquivos de Entrada e Saída:
+O script lê proxies de arquivos como https_proxies.txt, socks4_proxies.txt, ou socks5_proxies.txt.
+Proxies ativas são salvas no arquivo active_proxies.txt.
+⚙️ Como Usar
+Escolha o tipo de proxy:
+
+Digite 1 para HTTP/HTTPS.
+Digite 2 para SOCKS4.
+Digite 3 para SOCKS5.
+Forneça o arquivo de proxies:
+
+O script irá perguntar o tipo de proxy que você quer testar.
+Tenha arquivos de proxies como https_proxies.txt, socks4_proxies.txt ou socks5_proxies.txt prontos.
+Verifique as proxies:
+
+O script irá testar as proxies, mostrando no terminal se estão vivas ou mortas.
+As proxies vivas são salvas no arquivo active_proxies.txt.
+Exemplo de Execução no Terminal:
+bash
+Copiar código
+$ python proxy_checker.py
+Você verá o seguinte no terminal:
+
+markdown
+Copiar código
+Escolha o tipo de proxy para verificar:
+1. HTTPS (HTTP/HTTPS)
+2. SOCKS4
+3. SOCKS5
+
+Digite o número correspondente: 1
+
+(192.168.0.1:8080) HTTP/HTTPS ESTÁ VIVA
+(192.168.0.2:8080) SOCKS5 ESTÁ MORTA
+...
+🌈 Personalização
+Cores Personalizadas: O script utiliza a biblioteca colorama para colorir a saída no terminal:
+🟩 Verde: Proxy ativa.
+🟥 Vermelho: Proxy inativa.
+💖 Rosa: Estilo do texto.
+⚪ Branco: Informações gerais.
+📄 Arquivos de Entrada
+O script espera que os arquivos de proxies estejam no formato:
+
+https_proxies.txt para proxies HTTP/HTTPS.
+socks4_proxies.txt para proxies SOCKS4.
+socks5_proxies.txt para proxies SOCKS5.
+Cada linha desses arquivos deve conter um proxy no formato:
+
+makefile
+Copiar código
+ip:porta
+Exemplo:
+
+makefile
 Copiar código
 192.168.1.1:8080
-192.168.1.2:1080
-123.45.67.89:3128
-Verifique o resultado: O script criará um arquivo de saída chamado active_proxies.txt, onde serão salvas as proxies ativas. ✅
-⚙️ Como Funciona
-Etapas de execução:
-O script carrega as proxies do arquivo proxies.txt.
-Em seguida, verifica cada proxy individualmente.
-Para cada proxy, o script tenta se conectar usando diferentes tipos de protocolos (SOCKS5, SOCKS4, HTTP/HTTPS).
-Caso o proxy responda corretamente (status code 200), ele é considerado ativo e é adicionado ao arquivo active_proxies.txt. 📈
-Ao final, o script imprime um resumo da execução e lista as proxies ativas no arquivo. 📄
-Exemplo de saída:
-csharp
+203.0.113.0:1080
+💾 Arquivo de Saída
+Após a verificação, o script salva as proxies ativas no arquivo:
+
 Copiar código
-Pressione 'ENTER' para começar a verificar as proxies... 👇
-██╗  ██╗ █████╗   ██╗  ██╗ █████╗   
-██║  ██║██╔══██╗ ██║  ██║██╔══██╗  
-███████║███████║ ███████║███████║  
-██╔══██║██╔══██║ ██╔══██║██╔══██║  
-██║  ██║██║  ██║ ██║  ██║██║  ██║  
-╚═╝  ╚═╝╚═╝  ╚═╝ ╚═╝  ╚═╝╚═╝  ╚═╝  
+active_proxies.txt
+Cada proxy ativa será salva no formato ip:porta.
 
-(192.168.1.1:8080) SOCKS5 ESTÁ VIVA ✅
-(123.45.67.89:3128) HTTP/HTTPS ESTÁ VIVA ✅
-(192.168.1.2:1080) ESTÁ MORTA ❌
+🧑‍💻 Autor
+Feito por Caique 😎
 
-Verificação concluída. Proxies ativas salvas em 'active_proxies.txt'. 📂
-📂 Arquivos Gerados
-proxies.txt: Arquivo com a lista de proxies a serem verificadas. 📋
-active_proxies.txt: Arquivo com as proxies ativas após a verificação. ✅
-⚙️ Configurações
-Você pode personalizar algumas configurações do script:
-
-TEST_URL: URL usada para testar as proxies. Atualmente está configurado para "https://www.google.com", mas pode ser alterado para qualquer URL de sua escolha. 🌍
-TIMEOUT: O tempo máximo (em segundos) que o script espera por uma resposta de cada proxy. ⏱️
-MAX_THREADS: Número máximo de threads simultâneas para a verificação de proxies. 💨
-PROXY_FILE: Nome do arquivo que contém a lista de proxies para verificação (padrão: proxies.txt). 📂
-OUTPUT_FILE: Nome do arquivo onde as proxies ativas serão salvas (padrão: active_proxies.txt). 💾
-🖥️ Como Rodar
-Clone ou baixe o script Python.
-Crie ou edite o arquivo proxies.txt na mesma pasta do script.
-Execute o script com:
-bash
-Copiar código
-python proxy_checker.py
-📜 Licença
-Este projeto está licenciado sob a MIT License.
-
+Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
